@@ -1,0 +1,20 @@
+<template>
+    <div class="list-block">
+        <ul>
+            <li class="item-content" repeat.for="todo of todos" click.delegate="viewTodo(todo)">
+                <div class="item-inner ${todo.done === true || todo.done === 'true' ? 'done' : ''}">
+                    ${todo.title}
+                </div>
+                <p><a href="#" class="button button-fill color-green button-raised" click.delegate="toggleDone(todo)">Toggle Done</a></p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content-block">
+        <div class="col-50"><a href="#" class="button button-fill" click.delegate="addTodo()">Add</a></div>
+    </div>
+
+    <div class="content-block">
+        <div class="col-50"><a href="#" class="button button-fill" click.delegate="f7.openPanel('left')">Open Left Panel</a></div>
+    </div>
+</template>

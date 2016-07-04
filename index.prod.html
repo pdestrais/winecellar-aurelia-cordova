@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aurelia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; connect-src *; img-src 'self' 'unsafe-inline' data: *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://9.134.129.31:5984 https://*.cloudant.com http://localhost:5984">
+  </head>
+  <body>
+    <div class="splash">
+      <div class="message">MyCellar Aurelia App</div>
+      <i class="fa fa-spinner fa-spin"></i>
+    </div>
+    <!-- problem with PouchDB and webpack makes me add manually the pouchDB script-->
+    <script src="./node_modules/pouchdb/dist/pouchdb.min.js"></script>
+  </body>
+</html>

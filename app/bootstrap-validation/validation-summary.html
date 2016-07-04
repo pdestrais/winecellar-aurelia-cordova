@@ -1,0 +1,16 @@
+<template bindable="errors, autofocus">
+  <div style="width:80%; margin: auto;">
+  <div class="alert alert-danger" style="${errors.length>0 ? '' : 'display: none;'}" tabindex="-1">       
+<!--  <div class="alert alert-danger" tabindex="-1"       
+       show.bind="errors.length"
+       focus.one-way="autofocus && errors.length > 0">
+-->    <ul class="list-unstyled">
+      <li repeat.for="errorInfo of errors">
+        <a class="text-error" href="#" click.delegate="errorInfo.target.focus()">
+          ${errorInfo.error.message}
+        </a>
+      </li>
+    </ul>
+  </div>
+  </div>
+</template>

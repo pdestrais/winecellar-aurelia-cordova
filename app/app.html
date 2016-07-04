@@ -1,0 +1,116 @@
+<template>
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+        <div class="content-block-title">Gestion Cave</div>
+        <div class="list-block">
+            <ul>
+                <li>
+                    <a href="#" class="item-link item-content close-panel" click.delegate = "router.navigate('search')">
+                        <div class="item-media"><i class="icon icon-home"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title" t="search">Recherche</div>
+                    </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-link item-content close-panel" click.delegate = "router.navigate('vin')">
+                        <div class="item-media"><i class="icon icon-vin"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title" t="wine">Vin</div>
+                    </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-link item-content close-panel">
+                        <div class="item-media"><i class="icon icon-region"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title" t="region">Région</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-link item-content close-panel"  click.delegate = "router.navigate('listAppellations')">
+                        <div class="item-media"><i class="icon icon-appellation"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title" t="appellation">Appellation</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-link item-content close-panel" click.delegate = "router.navigate('rapport')">
+                        <div class="item-media"><i class="icon icon-rapport"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title" t="report">Rapport</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-link item-content close-panel" click.delegate = "createPDF()">
+                        <div class="item-media"><i class="icon icon-pdfrapport"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title" t="reportPDF">Rapport</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block-title">Configuration</div>
+        <div class="list-block">
+            <ul>
+                <li>
+                    <a href="test.html" class="item-link item-content close-panel" click.delegate = "router.navigate('config')">
+                        <div class="item-media"><i class="icon icon-form-settings"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title" t="config">Configuration</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="./#/test" class="item-link item-content close-panel" click.delegate = "router.navigate('test')">
+                        <div class="item-inner">
+                            <div class="item-title">Test</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Views -->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+ 			       <div class="left">
+		            <a href="#" class="link icon-only" click.delegate = "goBack()">
+		                <i class="icon icon-back"></i>
+    		        </a>
+        		</div>
+                <div class="center sliding">MyCellar</div>
+				<div class="right">
+					<a href="#" class="link icon-only open-panel">
+						<i class="icon icon-bars"></i>
+					</a>
+				</div>
+                </div>
+            </div>
+            <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-fixed toolbar-through">
+                <!-- Page, "data-page" contains page name -->
+                <div class="page">
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+                        <router-view></router-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

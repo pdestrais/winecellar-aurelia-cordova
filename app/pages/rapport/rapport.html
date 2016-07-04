@@ -1,0 +1,45 @@
+<template>
+    <h3 t="stock">Contenu cave</h3>
+        <div class="accordion-list custom-accordion">
+            <div repeat.for="type of rapport" click.delegate="" class="accordion-item">
+                <div class="accordion-item-toggle"><i class="icon icon-plus">+</i><i class="icon icon-minus">-</i>
+                    <span>${type.nom} &nbsp;<div class="chip"><div class="chip-label">${type.count}</span></div></div>
+                </div>
+                <div class="accordion-item-content">
+                    <div class="accordion-list custom-accordion">
+                        <div repeat.for="origine of type.origines" click.delegate="" class="accordion-item">
+                            <div class="accordion-item-toggle"><i class="icon icon-plus">+</i><i class="icon icon-minus">-</i>
+                                <span>${origine.nom} &nbsp;<div class="chip"><div class="chip-label">${origine.count}</span></div></div>
+                            </div>
+                            <div class="accordion-item-content">
+                                <div class="accordion-list custom-accordion">
+                                    <div repeat.for="annee of origine.annees" click.delegate="" class="accordion-item">
+                                        <div class="accordion-item-toggle"><i class="icon icon-plus">+</i><i class="icon icon-minus">-</i>
+                                            <span>${annee.annee} &nbsp;<div class="chip"><div class="chip-label">${annee.count}</span></div></div>
+                                        </div>
+                                        <div class="accordion-item-content">
+                                            <div class="list-block reportListBlock">
+                                                <ul>
+                                                    <li class="item-content" repeat.for="wine of annee.wines" click.delegate="viewVin(wine._id)">
+                                                        <div class="item-inner">
+                                                            <div class="card">
+                                                                <div class="card-header reportCardHeader">${wine.nom} &nbsp;<div class="chip"><div class="chip-label">${wine.nbreBouteillesReste}</div></div></div>
+                                                                <div class="card-content">
+                                                                    <div class="card-content-inner" t="priceLocation" t-params.bind="wine">prix: ${wine.prixAchat}€ - Localisation: ${wine.localisation}</div>
+                                                                </div>
+<!--                                                                <div class="card-footer">Footer</div>
+-->                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</template>

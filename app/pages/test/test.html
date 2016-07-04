@@ -1,0 +1,30 @@
+<template>
+
+  <h1>Register!</h1>
+  
+  <form submit.delegate="submit()"
+        validation-renderer="bootstrap-form"
+        validation-errors.bind="errors">
+
+    <div class="form-group">
+      <label class="control-label" for="first">First Name</label>
+      <input type="text" class="form-control" id="first" placeholder="First Name"
+             value.bind="firstName & validate">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="last">Last Name</label>
+      <input type="text" class="form-control" id="last" placeholder="Last Name"
+             value.bind="lastName & validate">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="email">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="Email"
+             value.bind="email & validate">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-default" click.delegate="reset()">Reset</button>
+  </form>
+</template>

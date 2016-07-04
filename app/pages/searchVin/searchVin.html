@@ -1,0 +1,42 @@
+<template>
+    <h3 t="searchWine">Rechercher un vin</h3>
+
+   <form class="searchbar theme-gray searchbar-active" >
+        <div class="searchbar-input white">
+            <input type="search" value.bind="searchText & debounce:350" t="[placeholder]searchWine" placeholder="Rechercher un vin">
+            <a href="#" class="searchbar-clear" click.delegate="clearSearchBar()"></a>
+        </div>
+        <a href="#" class="searchbar-cancel" click.delegate="clearSearchBar()">Cancel</a>
+    </form>
+    <div class="list-block list-block-search searchbar-found">
+        <ul>
+            <li class="item-content" repeat.for="vin of vinsForSearch"">
+                <div class="item-inner">
+                    <a href="#" class="item-title" click.delegate="viewVin(vin._id)">${vin.nom} - ${vin.annee}</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="list-block">
+        <ul>
+            <li>
+                <label class="label-radio item-content">
+                    <input type="radio" name="ks-radio" model.bind="true" checked.bind="stock" change.delegate="clearSearchBar()"/>
+                    <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title" t="searchInStock">Recherche vin encore en stock</div>
+                    </div>
+                </label>
+            </li>
+            <li>
+                <label class="label-radio item-content">
+                    <input type="radio" name="ks-radio" model.bind="false" checked.bind="stock" change.delegate="clearSearchBar()"/>
+                    <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title" t="searchInOutStock">Recherche tous les vins</div>
+                    </div>
+                </label>
+            </li>
+        </ul>
+    </div>
+ </template>

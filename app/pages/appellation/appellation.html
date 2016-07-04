@@ -1,0 +1,49 @@
+<template>
+    <require from="../dirty"></require>
+    <require from="../../bootstrap-validation/validation-summary.html"></require>
+
+    <form dirty.bind="isDirty" validation-renderer="bootstrap-form" validation-errors.bind="errors">
+<!--        <validation-summary errors.bind="errors" autofocus.bind="controller.validateTrigger === 'manual'">
+        </validation-summary>
+-->        <div class="list-block">
+            <ul>
+               <li class="form-group">
+                    <div class="item-content" >
+                        <div class="item-inner">
+                            <div class="item-title label" t="short">courte</div>
+                            <div class="item-input">
+                                <input type="text" class="form-control" t="[placeholder]shortVersion" placeholder="version courte" 
+                                    value.bind="appellation.courte & validate" required>
+                            </div>
+                       </div>
+                    </div>
+               </li>
+                <li class="align-top form-group">
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label" t="long">longue</div>
+                            <div class="item-input">
+                                <input type="text" class="form-control" t="[placeholder]longVersion" placeholder="version longue" 
+                                    value.bind="appellation.longue & validate" required>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content-block">
+            <div class="row">
+                <div class="col-50">
+                    <a href="#" class="button button-fill color-green ${isDirty ? '' : 'disabled'}" 
+                        click.delegate="saveAppellation()" t="save">Sauvegarder</a>
+                </div>
+                <div class="col-50">
+                    <a href="#" class="button button-fill color-red ${appellation._id ? '' : 'disabled'}" 
+                        click.delegate="deleteAppellation()" t="delete">Supprimer</a>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</template>

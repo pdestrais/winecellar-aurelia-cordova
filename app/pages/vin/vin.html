@@ -1,0 +1,168 @@
+<template>
+    <require from="../dirty"></require>
+    <form dirty.bind="isDirty" validation-renderer="bootstrap-form" validation-errors.bind="errors">
+        <div class="list-block">
+            <ul>
+                <li class="form-group">
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label" t="name">Nom</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="Nom" value.bind="vin.nom & validate" required>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="align-top form-group">
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label" t="year">Année</div>
+                            <div class="item-input">
+                                <input type="number" placeholder="Année" value.bind="vin.annee & validate" required>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li >
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <!-- Select label -->
+                            <div class="item-title label" t="type">Type</div>
+                    <!-- select -->
+                            <div class="item-input">
+                                <select name="typeSelection" value.bind="vin.type.id">
+                                    <option repeat.for="type of types" model.bind="type.id">${type.doc.nom}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <!-- Additional "smart-select" class -->
+<!--                        <a href="#" class="item-link smart-select" data-open-in="page">
+-->                            <div class="item-content">
+                                <div class="item-inner">
+                                    <!-- Select label -->
+                                    <div class="item-title label" t="origin">Origine</div>
+                            <!-- select -->
+                                    <div class="item-input">
+                                        <select name="optionListSelection" value.bind="vin.origine.id">
+                                            <option repeat.for="origine of origines" model.bind="origine.id">${origine.doc.pays} | ${origine.doc.region}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+<!--                    </a>
+-->                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <!-- Select label -->
+                            <div class="item-title label" t="appellation">Appellation</div>
+                    <!-- select -->
+                            <div class="item-input">
+                                <select name="appellationSelection" value.bind="vin.appellation.id">
+                                    <option repeat.for="appellation of appellations" model.bind="appellation.id">${appellation.doc.courte} - ${appellation.doc.longue}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="align-top form-group">
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label" t="numberPurchased"># Bout. Achat</div>
+                            <div class="item-input">
+                                <input type="number" placeholder="boutAchat" value.bind="vin.nbreBouteillesAchat & validate" required>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="align-top form-group">
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label" t="NumberLeft">Reste</div>
+                            <div class="item-input">
+                                <input type="number" placeholder="reste" value.bind="vin.nbreBouteillesReste & validate" required>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="align-top form-group">
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label" t="price">Prix</div>
+                            <div class="item-input">
+                                <input type="number" placeholder="Prix" value.bind="vin.prixAchat & validate" required>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="align-top form-group">
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label" t="purchaseDate">Date Achat</div>
+                            <div class="item-input">
+                                <input type="date" placeholder="Prix" value.bind="vin.dateAchat & validate" required>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="align-top form-group">
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label" t="comment">Commentaire</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="..." value.bind="vin.remarque & validate">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="align-top form-group">
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label" t="localization">Localisation</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="D/G.y.x" value.bind="vin.localisation & validate" required>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="align-top form-group">
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label" t="capacity">Contenance</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="75" value.bind="vin.contenance & validate" required>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content" repeat.for="event of vin.history">
+                    <div class="item-inner">
+                        <div class="card">
+                            <div class="card-header reportCardHeader">${event.date} &nbsp;<div class="chip"><div class="chip-label">${event.reste}</div></div></div>
+<!--                            <div class="card-content">
+                                <div class="card-content-inner" t="priceLocation" t-params.bind="wine">prix: ${wine.prixAchat}€ - Localisation: ${wine.localisation}</div>
+                            </div>
+-->
+<!--                                                                <div class="card-footer">Footer</div>
+-->                                                            </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content-block">
+            <div class="row">
+<!--                <div class="col-33"><a href="#" class="button button-fill color-yellow" click.delegate="cancel()">Annuler</a></div>
+-->                <div class="col-33">
+                    <a href="#" class="button button-fill color-green ${isDirty ? '' : 'disabled'}" click.delegate="saveVin()" t="save">Sauvegarder</a>
+                </div>
+                <div class="col-33">
+                    <a href="#" class="button button-fill color-red ${vin._id ? '' : 'disabled'}" click.delegate="deleteVin()" t="delete">Supprimer</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</template>
