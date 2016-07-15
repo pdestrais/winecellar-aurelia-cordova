@@ -36,6 +36,11 @@
     "creationProblem":"Problème avec la création ou la mise à jour",
     "deleteProblem":"Problème avec la suppression",
     "save":"sauvegarder",
-    "delete":"supprimer"
-
+    "delete":"supprimer",
+    "history":"Historique",
+    "histDate":"date : ${event.date}",
+    "histUpdated":"Mis à jour le ",
+    "histNumbBottlesleft":"reste : ${event.reste}",
+    "histComment":"Commentaire : ${event.comment}",
+    "language":"langue"
 }

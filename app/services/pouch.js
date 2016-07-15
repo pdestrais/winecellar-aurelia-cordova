@@ -2,16 +2,18 @@ import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import { Router } from 'aurelia-router';
 import { SimpleCache } from './simpleCache';
+import {I18N} from 'aurelia-i18n';
 		
-@inject(EventAggregator, Router, SimpleCache)
+@inject(EventAggregator, Router, SimpleCache,I18N)
 export class Pouch {
-	constructor(eventAggregator, router, cache) {
+	constructor(eventAggregator, router, cache,i18n) {
 		console.log("entering Pouch constructor");
 		this.db = null;
 		this.eventAggregator = eventAggregator;
 		this.router = router;
 		this.cache = cache;
 		this.remoteServerUrl = "";
+		this.i18n = i18n;
 		this.init();
 		
 		this.vinView = "indexVin";
@@ -26,8 +28,12 @@ export class Pouch {
 		this.db.setMaxListeners(20);
 		this.db.info().then( info => {
   			console.log('We have a database: ' + JSON.stringify(info));
-			this.db.get("serverUrl").then(result => {
+			this.db.get("config").then(result => {
 				_self.remoteServerUrl = result.serverUrl;
+				_self.locale = result.locale;
+				result.locale
+					?this.i18n.setLocale(result.locale).then(console.log('Langue adaptée -> '+result.locale))
+					:this.i18n.setLocale("en-US").then(console.log('Langue par défaut -> '+"en-US"));
 				_self.createDBViews();
 				_self.eventAggregator.publish("SyncStarts");
 				console.log('Start syncing with: ' + _self.remoteServerUrl);
@@ -169,17 +175,19 @@ export class Pouch {
 	createSettings(config){
 		let _self = this;
 		return this.db.get(config.id).then(doc => {
-			// serverUrl doc exists, doc._rev is used to update)
+			// config doc exists, doc._rev is used to update)
 			console.log("existing config loaded");
 			return _self.db.put({
-				serverUrl: config.serverUrl
-			}, 'serverUrl', doc._rev);
+				serverUrl: config.serverUrl,
+				locale : config.locale
+			}, 'config', doc._rev);
 		}).catch(function (err) {
-			// no serverUrl document exists
+			// no config document exists
 			console.log("no existing config "+JSON.stringify(err));
 			return _self.db.put({
-				serverUrl: config.serverUrl
-			}, 'serverUrl');
+				serverUrl: config.serverUrl,
+				locale : config.locale
+			}, 'config');
 		});
 	}
 

@@ -5,23 +5,28 @@ import { Pouch } from '../../services/pouch';
 import { SimpleCache } from '../../services/simpleCache';
 import {NewInstance} from 'aurelia-dependency-injection';
 import {ValidationController, validateTrigger} from 'aurelia-validation';
+import {I18N,BaseI18N} from 'aurelia-i18n';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {required, email, length, date, datetime, numericality, ValidationRules} from 'aurelia-validatejs';
 
-@inject(F7, Router, Pouch, SimpleCache,NewInstance.of(ValidationController))
-export class vin {
-    constructor(f7,router, pouch, simpleCache,controller) {
+@inject(F7, Router, Pouch, SimpleCache,NewInstance.of(ValidationController),I18N,Element,EventAggregator)
+export class vin extends BaseI18N {
+    constructor(f7,router, pouch, simpleCache,controller,i18n,element,eventAggregator) {
         console.log('Entering vin constructor');
+        super(i18n,element,eventAggregator);
         this.f7 = f7;
         this.router = router;
         this.pouch = pouch;
         this.cache = simpleCache;
         this.controller = controller;
-        this.vin = new VinModel("","","","","",""," ","D.y.x","75");
+        this.vin = new VinModel("","","","","","","","D.y.x","75");
         this.isDirty = false;
         console.log('Loading reference values');
         this.origines = this.cache.get("originesRefList");
         this.appellations = this.cache.get("appellationsRefList");
         this.types = this.cache.get("typesRefList");    
+        this.comment='';
+        this.element = element;
         ValidationRules
             .ensure('nom').required({message: "est obligatoire"})
             .ensure('annee').required({message: "est obligatoire"})
@@ -29,11 +34,10 @@ export class vin {
             .ensure('nbreBouteillesReste').required({message: "est obligatoire"})
             .ensure('prixAchat').required({message: "est obligatoire"})
             .ensure('dateAchat').required({message: "est obligatoire"})
-            .ensure('remarque').required({message: "est obligatoire"})
+//            .ensure('remarque').required({message: "est obligatoire"})
             .ensure('localisation').required({message: "est obligatoire"})
             .ensure('contenance').required({message: "est obligatoire"})
             .on(VinModel);
-    
     }
     
     setAnnee() {
@@ -49,7 +53,12 @@ export class vin {
 //            return this.pouch.getDoc(params.id).then(vin => _self.vin = vin);
         }
     }
-    
+ 
+     attached() {
+        super.attached();
+            this.i18n.updateTranslations(this.element);
+    }
+   
     saveVin() {
       let _self = this;
       let errors = this.controller.validate();
@@ -62,7 +71,7 @@ export class vin {
                 this.vin.type = {id:seltype.doc._id,nom:seltype.doc.nom};
                 var selappellation = this.appellations.find(function matcher(appellation) {return (appellation.id == _self.vin.appellation.id)});
                 this.vin.appellation = {id:selappellation.doc._id,courte:selappellation.doc.courte,longue:selappellation.doc.longue};
-                this.vin.history.push({date:this.vin.lastUpdated,reste:this.vin.nbreBouteillesReste});
+                this.comment?this.vin.history.push({type:"comment",date:this.vin.lastUpdated,reste:this.vin.nbreBouteillesReste,comment:this.comment}):this.vin.history.push({type:"update",date:this.vin.lastUpdated});
                 this.pouch.saveVin(this.vin)
                     .then(response => {
                         let _self1 = _self
@@ -100,6 +109,11 @@ export class vin {
     
     cancel() {
         this.router.navigateBack();
+    }
+    
+    addComment() {
+        this.isDirty=true;
+        this.saveVin();
     }
 }
 

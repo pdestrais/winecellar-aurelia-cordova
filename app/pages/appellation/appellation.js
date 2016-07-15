@@ -7,18 +7,23 @@ import {NewInstance} from 'aurelia-dependency-injection';
 import {ValidationController, validateTrigger} from 'aurelia-validation';
 import {required, email, length, date, datetime, numericality, ValidationRules} from 'aurelia-validatejs';
 import {Util} from '../../services/util';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {I18N,BaseI18N} from 'aurelia-i18n';
 
 
-@inject(F7, Router, Pouch, SimpleCache,Util,NewInstance.of(ValidationController))
-export class appellationClass {
+@inject(F7, Router, Pouch, SimpleCache,Util,NewInstance.of(ValidationController),I18N,Element,EventAggregator)
+export class appellationClass extends BaseI18N {
 
     errors = [];
     errorModel = {};
     intercepted = [];
     observerDisposer;
  
-    constructor(f7,router, pouch,simpleCache,util,controller) {
+    constructor(f7,router, pouch,simpleCache,util,controller,i18n,element,eventAggregator) {
         console.log('Entering appellation VM constructor');
+        super(i18n,element,eventAggregator);
+        this.i18n = i18n;
+        this.element = element;        
         this.f7 = f7;
         this.router = router;
         this.pouch = pouch;
@@ -34,6 +39,12 @@ export class appellationClass {
             .on(AppellationModel);
 
     }
+
+     attached() {
+        super.attached();
+            this.i18n.updateTranslations(this.element);
+    }
+
     activate(params) {
         var _self = this;
         if (params.id) {

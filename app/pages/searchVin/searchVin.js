@@ -6,7 +6,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {I18N,BaseI18N} from 'aurelia-i18n';
 
 
-@inject(F7, Router, Pouch, EventAggregator,I18N,Element)
+@inject(F7, Router, Pouch, I18N,Element,EventAggregator)
 export class searchVin extends BaseI18N {
     heading = 'Welcome to the Aurelia Framework 7 MyCellar App';
     vins = [];
@@ -15,7 +15,7 @@ export class searchVin extends BaseI18N {
     stock = true;
     _searchText = '';
 
-    constructor(f7, router, pouch, eventAggregator,i18n,element) {
+    constructor(f7, router, pouch,i18n,element,eventAggregator) {
         console.log('Entering searchVin constructor');
         super(i18n,element,eventAggregator);
         this.f7 = f7;
@@ -23,16 +23,9 @@ export class searchVin extends BaseI18N {
         this.pouch = pouch;
 		this.eventAggregator = eventAggregator;
         this.i18n = i18n;
-        this.element = element;
-        this.i18n
-        .setLocale('en')    
-        .then( () => {
-            console.log('Locale is ready!');
-        });
-/*        this.canShowSearch = false;
-*/        
-        var _self = this;
-    }
+        this.element = element;        
+/*        var _self = this;
+*/    }
     
     get searchText() {
         return this._searchText;
@@ -58,6 +51,8 @@ export class searchVin extends BaseI18N {
     }
 
     attached() {
+        super.attached();
+        this.i18n.updateTranslations(this.element);
         var _self = this;
         this.eventAggregator.subscribe("SyncStarts", function(){_self.showLoadingModal()} );
         this.eventAggregator.subscribe("dbUpToDate", function(){
@@ -84,5 +79,5 @@ export class searchVin extends BaseI18N {
         });
         this.f7.showPreloader("Chargement des vins ...");
     }
-    
+     
 }

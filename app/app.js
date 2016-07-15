@@ -8,7 +8,7 @@ export class App {
     }
     
     configureRouter(config, router) {
-        config.title = 'Aurelia';
+        config.title = 'wineCellar App Config';
         config.map([
             {
                 route: ['todos'],
@@ -64,6 +64,18 @@ export class App {
                 moduleId: 'pages/appellation/appellation',
                 nav: true,
                 title: 'Appellation',
+            } , {
+                route: ['listOrigines'],
+                name: 'listOrigines',
+                moduleId: 'pages/origin/list-origines',
+                nav: true,
+                title: 'Liste Origines',
+            } , {
+                route: ['origine'],
+                name: 'origine',
+                moduleId: 'pages/origin/origin',
+                nav: true,
+                title: 'Origine',
             }
         ]);
 

@@ -36,5 +36,11 @@
     "creationProblem":"Problem with creation or update",
     "deleteProblem":"Problem with deletion",
     "save":"Save",
-    "delete":"Delete"
+    "delete":"Delete",
+    "history":"History",
+    "histDate":"date : {{date.toString()}}",
+    "histUpdated":"Updated on ",
+    "histNumbBottlesleft":"# bottles left : {{reste}}",
+    "histComment":"Comment : {{comment}}",
+    "language":"language"
 }

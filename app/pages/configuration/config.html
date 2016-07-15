@@ -6,6 +6,18 @@
                     <li>
                         <div class="item-content">
                             <div class="item-inner">
+                                <div class="item-title label" t="language">langue</div>
+                                <div class="item-input">
+                                    <select name="languageSelection" value.bind="config.locale" change.delegate="changeLanguage()">
+                                        <option repeat.for="lang of supportedLanguages" model.bind="lang.locale">${lang.language}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
                                 <div class="item-title label">URL serveur DB</div>
                                 <div class="item-input">
                                     <input type="text" placeholder="Nom" value.bind="config.serverUrl" required>

@@ -17,7 +17,7 @@
     <div class="list-block">
         <ul>
             <li repeat.for="origine of origines" >
-                <a href="#" class="item-link item-content"  click.delegate="viewAppellation(appellation)">
+                <a href="#" class="item-link item-content"  click.delegate="viewOrigine(origine)">
                     <div class="item-inner">
                         <div class="item-title">${origine.pays} - ${origine.region}</div>
                     </div>
@@ -27,6 +27,6 @@
     </div>
 
     <div class="content-block">
-        <div><a href="#" class="button button-fill" click.delegate="addAppellation()">Ajouter Origine</a></div>
+        <div><a href="#" class="button button-fill" click.delegate="addOrigine()">Ajouter Origine</a></div>
     </div>
 </template>

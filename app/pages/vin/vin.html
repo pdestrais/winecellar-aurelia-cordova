@@ -138,31 +138,75 @@
                         </div>
                     </div>
                 </li>
-                <li class="item-content" repeat.for="event of vin.history">
-                    <div class="item-inner">
-                        <div class="card">
-                            <div class="card-header reportCardHeader">${event.date} &nbsp;<div class="chip"><div class="chip-label">${event.reste}</div></div></div>
-<!--                            <div class="card-content">
-                                <div class="card-content-inner" t="priceLocation" t-params.bind="wine">prix: ${wine.prixAchat}€ - Localisation: ${wine.localisation}</div>
-                            </div>
--->
-<!--                                                                <div class="card-footer">Footer</div>
--->                                                            </div>
+            </ul>
+        </div>
+
+        <div class="list-block accordion-list">
+            <ul>
+                <li class="accordion-item">
+                    <a href="#" class="item-content item-link">
+                        <div class="item-inner">
+                            <div class="item-title" t="history">History</div>
+                        </div>
+                    </a>
+                    <div class="accordion-item-content list-block cards-list">
+                        <ul>
+                            <li class="card" repeat.for="event of vin.history">
+                                <div class="card-header color-gray"><span t="histUpdated">updated on : </span> &nbsp; ${event.date} &nbsp;
+                                    <div class="chip">
+                                        <div class="chip-label" t-params.bind="event"># left : ${event.reste}</div>
+                                    </div>
+                                </div>
+                                <div class="card-content" style="${event.comment ? 'display: block; visibility: visible;' : 'display: none; visibility: hidden;'}">
+                                    <div class="card-content-inner" t="histComment" t-params.bind="event">comment : ${event.comment}</div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </li>
             </ul>
         </div>
-
         <div class="content-block">
             <div class="row">
-<!--                <div class="col-33"><a href="#" class="button button-fill color-yellow" click.delegate="cancel()">Annuler</a></div>
--->                <div class="col-33">
+                <div class="col-33">
                     <a href="#" class="button button-fill color-green ${isDirty ? '' : 'disabled'}" click.delegate="saveVin()" t="save">Sauvegarder</a>
                 </div>
                 <div class="col-33">
                     <a href="#" class="button button-fill color-red ${vin._id ? '' : 'disabled'}" click.delegate="deleteVin()" t="delete">Supprimer</a>
                 </div>
+                <div class="col-33">
+                    <a href="#" class="button button-fill color-blue open-login-screen" t="addComment">Ajouter commentaire</a>
+                </div>
             </div>
         </div>
     </form>
+    <div class="login-screen" style="top:5%">
+        <div class="view">
+            <div class="page">
+                <div class="page-content login-screen-content">
+                    <div class="login-screen-title">Add comment</div>
+                    <form>
+                        <div class="list-block">
+                            <ul>
+                                <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">Comment</div>
+                                        <div class="item-input">
+                                            <input type="text" value.bind="comment"" placeholder="Comment">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="list-block">
+                            <div class="row">
+                                <div><a href="#" class="button button-fill color-blue close-login-screen" click.delegate="addComment()">Ajouter Commentaire</a></div>
+                                <div><a href="#" class="button button-fill color-red close-login-screen">Annuler</a></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
