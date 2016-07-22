@@ -141,7 +141,7 @@
             </ul>
         </div>
 
-        <div class="list-block accordion-list">
+        <div if.bind="historyPresence()" class="list-block accordion-list">
             <ul>
                 <li class="accordion-item">
                     <a href="#" class="item-content item-link">
@@ -153,12 +153,12 @@
                         <ul>
                             <li class="card" repeat.for="event of vin.history">
                                 <div class="card-header color-gray"><span t="histUpdated">updated on : </span> &nbsp; ${event.date} &nbsp;
-                                    <div class="chip">
-                                        <div class="chip-label" t-params.bind="event"># left : ${event.reste}</div>
+                                    <div class="chip" css="${event.difference && event.difference!=0 ? 'display: block; visibility: visible;' : 'display: none; visibility: hidden;'}">
+                                        <div class="chip-label"><span t="histNumbBottlesDiff"># difference : </span> &nbsp; ${event.difference}</div>
                                     </div>
                                 </div>
-                                <div class="card-content" style="${event.comment ? 'display: block; visibility: visible;' : 'display: none; visibility: hidden;'}">
-                                    <div class="card-content-inner" t="histComment" t-params.bind="event">comment : ${event.comment}</div>
+                                <div class="card-content" css="${event.comment ? 'display: block; visibility: visible;' : 'display: none; visibility: hidden;'}">
+                                    <div class="card-content-inner"><span t="histComment">comment : </span> &nbsp; ${event.comment}</div>
                                 </div>
                             </li>
                         </ul>
@@ -192,7 +192,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">Comment</div>
                                         <div class="item-input">
-                                            <input type="text" value.bind="comment"" placeholder="Comment">
+                                            <input type="text" value.bind="remarque"" placeholder="Comment">
                                         </div>
                                     </div>
                                 </li>

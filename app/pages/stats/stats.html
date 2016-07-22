@@ -1,0 +1,75 @@
+<template>
+    <style>
+        .legend {
+            font-size: 12px;
+        }
+        
+        rect {
+            stroke-width: 2;
+        }
+      #chart {                                                          
+        height: 360px;                                                  
+        position: relative;                                             
+        width: 360px;                                                   
+      }                                                                 
+      .tooltip {                                                        
+        background: #eee;                                               
+        box-shadow: 0 0 5px #999999;                                    
+        color: #333;                                                    
+        display: none;                                                  
+        font-size: 12px;                                                
+        left: 130px;                                                    
+        padding: 10px;                                                  
+        position: absolute;                                             
+        text-align: center;                                             
+        top: 95px;                                                      
+        width: 80px;                                                    
+        z-index: 10;                                                    
+      }                                                                 
+
+    </style>
+<!--    <link rel="stylesheet" href="css/line-chart.css">
+-->
+    <section class="au-animate">
+        <h2>Consumption Statistics</h2>
+        <div if.bind="didError" class="alert alert-danger" role="alert">${errorMessage}</div>
+        <form>
+            <div class="list-block">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label" t="from">from</div>
+                                    <div class="item-input">
+                                        <select name="startFromSelect" value.bind="start">
+                                            <option repeat.for="option of fromOptions" model.bind="option.value">${option.display}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label" t="to">to</div>
+                                    <div class="item-input">
+                                        <select name="startFromSelect" value.bind="end">
+                                            <option repeat.for="option of toOptions" model.bind="option.value">${option.display}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <div class="row">
+                            <a href="#" class="button button-fill color-blue" click.delegate="draw()" t="show">Show</a>
+                    </div>
+                </div>
+
+            </form>
+        <div id="title"></div>
+        <div id="chart"></div>
+    </section>
+</template>

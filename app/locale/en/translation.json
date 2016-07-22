@@ -40,7 +40,14 @@
     "history":"History",
     "histDate":"date : {{date.toString()}}",
     "histUpdated":"Updated on ",
-    "histNumbBottlesleft":"# bottles left : {{reste}}",
-    "histComment":"Comment : {{comment}}",
-    "language":"language"
+    "histNumbBottlesDiff":"# bottles difference : ",
+    "histComment":"Comment : ",
+    "language":"language",
+    "consumptionStat":"Consumption Statistics",
+    "from":"from",
+    "to":"to",
+    "now":"now",
+    "oneYear":"one year",
+    "twoYears":"two years",
+    "threeYears":"three years"
 }

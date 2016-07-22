@@ -41,9 +41,9 @@ export class App {
                 nav: true,
                 title: 'Configuration',
             } , {
-                route: ['test'],
-                name: 'test',
-                moduleId: 'pages/test/test',
+                route: ['stats'],
+                name: 'stats',
+                moduleId: 'pages/stats/stats',
                 nav: true,
                 title: 'test',
             } , {

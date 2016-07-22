@@ -40,7 +40,14 @@
     "history":"Historique",
     "histDate":"date : ${event.date}",
     "histUpdated":"Mis à jour le ",
-    "histNumbBottlesleft":"reste : ${event.reste}",
-    "histComment":"Commentaire : ${event.comment}",
-    "language":"langue"
+    "histNumbBottlesDiff":"difference : ",
+    "histComment":"Commentaire : ",
+    "language":"langue",
+    "consumptionStat":"Statistiques de consommation",
+    "from":"à partir de",
+    "to":"jusqu'à",
+    "now":"maintenant",
+    "oneYear":"un an",
+    "twoYears":"deux ans",
+    "threeYears":"trois ans"
 }

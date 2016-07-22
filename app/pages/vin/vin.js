@@ -20,6 +20,8 @@ export class vin extends BaseI18N {
         this.cache = simpleCache;
         this.controller = controller;
         this.vin = new VinModel("","","","","","","","D.y.x","75");
+        this.nbreAvantUpdate = 0;
+        this.newWine = true;
         this.isDirty = false;
         console.log('Loading reference values');
         this.origines = this.cache.get("originesRefList");
@@ -45,15 +47,19 @@ export class vin extends BaseI18N {
     }
     
     activate(params) {
-        console.log('Vin activate called');
+        console.log('Vin activate called - params is :'+JSON.stringify(params));
         console.dir(this.appellations);
         var _self = this;
         if (params.id) {
-            return this.pouch.getDoc(params.id).then(vin => Object.assign(_self.vin, vin));
+            return this.pouch.getDoc(params.id).then(vin => {Object.assign(_self.vin, vin); _self.nbreAvantUpdate=_self.vin.nbreBouteillesReste; _self.newWine=false;});
 //            return this.pouch.getDoc(params.id).then(vin => _self.vin = vin);
-        }
+        } else
+            return (this.vin = new VinModel("","","","","","","","D.y.x","75"))
     }
  
+    historyPresence() {
+        return (typeof(this.vin.history) != 'undefined' && this.vin.history.length > 0)
+    }
      attached() {
         super.attached();
             this.i18n.updateTranslations(this.element);
@@ -71,7 +77,16 @@ export class vin extends BaseI18N {
                 this.vin.type = {id:seltype.doc._id,nom:seltype.doc.nom};
                 var selappellation = this.appellations.find(function matcher(appellation) {return (appellation.id == _self.vin.appellation.id)});
                 this.vin.appellation = {id:selappellation.doc._id,courte:selappellation.doc.courte,longue:selappellation.doc.longue};
-                this.comment?this.vin.history.push({type:"comment",date:this.vin.lastUpdated,reste:this.vin.nbreBouteillesReste,comment:this.comment}):this.vin.history.push({type:"update",date:this.vin.lastUpdated});
+                if (this.newWine) {
+                    this.vin.history.push({type:"creation",difference:this.vin.nbreBouteillesReste,date:this.vin.lastUpdated});
+                } else {
+                    if (this.vin.nbreBouteillesReste-this.nbreAvantUpdate!=0)
+                        this.vin.history.push({type:"update",difference:this.vin.nbreBouteillesReste-this.nbreAvantUpdate,date:this.vin.lastUpdated});   
+                }
+                if (this.vin.remarque && this.vin.remarque!="") {
+                    this.vin.history.push({type:"comment",date:this.vin.lastUpdated,comment:this.vin.remarque});
+                    this.vin.remarque="";
+                }
                 this.pouch.saveVin(this.vin)
                     .then(response => {
                         let _self1 = _self
