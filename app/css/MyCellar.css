@@ -32,6 +32,12 @@ i.icon.icon-pdfrapport {
   background-image: url("../img/list.svg");
 }
 
+i.icon.icon-stats {
+  width: 24px;
+  height: 24px;
+  background-image: url("../img/statistics.svg");
+}
+
 i.icon.icon-home {
   width: 24px;
   height: 24px;

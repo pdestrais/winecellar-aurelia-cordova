@@ -8,20 +8,8 @@ import {I18N,BaseI18N} from 'aurelia-i18n';
 export class Stats extends BaseI18N {
 
     vins = [];
-/*    dataset = [
-          { label: 'Abulia', count: 10 },
-          { label: 'Betelgeuse', count: 20 },
-          { label: 'Cantaloupe', count: 30 },
-          { label: 'Dijkstra', count: 40 }
-        ];
-*/    dataset = [];
+    dataset = [];
 
-
-
-/*  static inject() {
-    return [d3];
-  }
-*/
   constructor (pouch,d3,i18n,element,eventAggregator) {
     super(i18n,element,eventAggregator);
     this.pouch = pouch;
@@ -29,7 +17,7 @@ export class Stats extends BaseI18N {
     this.eventAggregator = eventAggregator;
     this.i18n = i18n;
     this.element = element;   
-    this.fromOptions=[{value:1,display:this.i18n.tr('oneYear')},
+    this.fromOptions=[{value:1,display:this.i18n.tr('oneYear',this.i18n.getLocale())},
                 {value:2,display:this.i18n.tr('twoYears')},
                 {value:3,display:this.i18n.tr('threeYears')}];   
     this.toOptions=[{value:0,display:this.i18n.tr('now')},

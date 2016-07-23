@@ -29,7 +29,7 @@ export class origin extends BaseI18N {
         this.util = util;
         this.cache = simpleCache;
         this.controller = controller;
-        this.appellation = new AppellationModel("",""); 
+        this.origine = new OrigineModel("",""); 
         this.isDirty = false;
         this.vins = this.pouch.getVins().then(vins => this.vins = vins.map(v => v.doc));
          ValidationRules

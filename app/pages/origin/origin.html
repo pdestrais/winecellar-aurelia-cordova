@@ -24,7 +24,7 @@
                             <div class="item-title label" t="region">region</div>
                             <div class="item-input">
                                 <input type="text" class="form-control" t="[placeholder]region" placeholder="region" 
-                                    value.bind="origin.region & validate" required>
+                                    value.bind="origine.region & validate" required>
                             </div>
                         </div>
                     </div>
@@ -36,11 +36,11 @@
             <div class="row">
                 <div class="col-50">
                     <a href="#" class="button button-fill color-green ${isDirty ? '' : 'disabled'}" 
-                        click.delegate="saveAppellation()" t="save">Sauvegarder</a>
+                        click.delegate="saveOrigine()" t="save">Sauvegarder</a>
                 </div>
                 <div class="col-50">
-                    <a href="#" class="button button-fill color-red ${appellation._id ? '' : 'disabled'}" 
-                        click.delegate="deleteAppellation()" t="delete">Supprimer</a>
+                    <a href="#" class="button button-fill color-red ${origine._id ? '' : 'disabled'}" 
+                        click.delegate="deleteOrigine()" t="delete">Supprimer</a>
                 </div>
             </div>
         </div>
