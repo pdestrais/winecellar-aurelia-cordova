@@ -11,7 +11,7 @@ import frTranslations from './locale/fr/translation.json';
 //import 'bootstrap/dist/css/bootstrap.css';
 
 require('script!pouchdb/dist/pouchdb.js');
-require('script!jspdf/dist/jspdf.min.js');
+//require('script!jspdf/dist/jspdf.min.js');
 //require("json!./locale/fr/translation.json");
 //require('script!jspdf/dist/jspdf.min.js');
 //var PouchDb = require('pouchdb/dist/pouchdb');

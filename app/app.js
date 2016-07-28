@@ -1,11 +1,6 @@
 import {inject} from 'aurelia-framework';
-import {RapportPDF} from './services/rapportPDF';
 
-@inject(RapportPDF)
 export class App {
-    constructor(rapportPDFservice){
-       this.rapportPDFService = rapportPDFservice;
-    }
     
     configureRouter(config, router) {
         config.title = 'wineCellar App Config';
@@ -90,8 +85,5 @@ export class App {
       history.forward();
    }
    
-   createPDF(){
-       this.rapportPDFService.cellarToPDF();
-   }
 
 }
