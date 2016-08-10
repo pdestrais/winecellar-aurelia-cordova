@@ -29,7 +29,8 @@
             </div>
             <div class="content-block">
                 <div class="row">
-                    <div class="col-100">
+                <div class="col-50"><a href="#" class="button button-fill color-red" click.delegate="destroyLocalDB()">Destroy local DB</a></div>
+                    <div class="col-50">
                         <a href="#"
                         class="button button-fill color-green ${isDirty ? '' : 'disabled'}"
                         click.delegate="saveConfig()">Save</a>

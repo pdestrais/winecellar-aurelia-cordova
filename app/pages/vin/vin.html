@@ -6,7 +6,7 @@
                 <li class="form-group">
                     <div class="item-content">
                         <div class="item-inner">
-                            <div class="item-title label" style="width: 45%;" t="name">Nom</div>
+                            <div class="item-title label" t="name">Nom</div>
                             <div class="item-input">
                                 <input type="text" placeholder="Nom" value.bind="vin.nom & validate" required>
                             </div>
@@ -16,7 +16,7 @@
                 <li class="align-top form-group">
                     <div class="item-content">
                         <div class="item-inner">
-                            <div class="item-title label" style="width: 45%;" t="year">Année</div>
+                            <div class="item-title label" t="year">Année</div>
                             <div class="item-input">
                                 <input type="number" placeholder="Année" value.bind="vin.annee & validate" required>
                             </div>
@@ -27,7 +27,7 @@
                     <div class="item-content">
                         <div class="item-inner">
                             <!-- Select label -->
-                            <div class="item-title label" style="width: 45%;" t="type">Type</div>
+                            <div class="item-title label" t="type">Type</div>
                     <!-- select -->
                             <div class="item-input">
                                 <select name="typeSelection" value.bind="vin.type.id">
@@ -43,7 +43,7 @@
 -->                            <div class="item-content">
                                 <div class="item-inner">
                                     <!-- Select label -->
-                                    <div class="item-title label" style="width: 45%;" t="origin">Origine</div>
+                                    <div class="item-title label" t="origin">Origine</div>
                             <!-- select -->
                                     <div class="item-input">
                                         <select name="optionListSelection" value.bind="vin.origine.id">
@@ -58,7 +58,7 @@
                     <div class="item-content">
                         <div class="item-inner">
                             <!-- Select label -->
-                            <div class="item-title label" style="width: 45%;" t="appellation">Appellation</div>
+                            <div class="item-title label" t="appellation">Appellation</div>
                     <!-- select -->
                             <div class="item-input">
                                 <select name="appellationSelection" value.bind="vin.appellation.id">
@@ -71,7 +71,7 @@
                 <li class="align-top form-group">
                     <div class="item-content">
                         <div class="item-inner">
-                            <div class="item-title label" style="width: 45%;" t="numberPurchased"># Bout. Achat</div>
+                            <div class="item-title label" t="numberPurchased"># Bout. Achat</div>
                             <div class="item-input">
                                 <input type="number" placeholder="boutAchat" value.bind="vin.nbreBouteillesAchat & validate" required>
                             </div>
@@ -81,7 +81,7 @@
                 <li class="align-top form-group">
                     <div class="item-content">
                         <div class="item-inner">
-                            <div class="item-title label" style="width: 45%;" t="NumberLeft">Reste</div>
+                            <div class="item-title label" t="NumberLeft">Reste</div>
                             <div class="item-input">
                                 <input type="number" placeholder="reste" value.bind="vin.nbreBouteillesReste & validate" required>
                             </div>
@@ -91,7 +91,7 @@
                 <li class="align-top form-group">
                     <div class="item-content">
                         <div class="item-inner">
-                            <div class="item-title label" style="width: 45%;" t="price">Prix</div>
+                            <div class="item-title label" t="price">Prix</div>
                             <div class="item-input">
                                 <input type="number" placeholder="Prix" value.bind="vin.prixAchat & validate" required>
                             </div>
@@ -101,7 +101,7 @@
                 <li class="align-top form-group">
                     <div class="item-content">
                         <div class="item-inner">
-                            <div class="item-title label" style="width: 45%;" t="purchaseDate">Date Achat</div>
+                            <div class="item-title label" t="purchaseDate">Date Achat</div>
                             <div class="item-input">
                                 <input type="date" placeholder="Prix" value.bind="vin.dateAchat & validate" required>
                             </div>
@@ -111,7 +111,7 @@
                 <li class="align-top form-group">
                     <div class="item-content">
                         <div class="item-inner">
-                            <div class="item-title label" style="width: 45%;" t="comment">Commentaire</div>
+                            <div class="item-title label" t="comment">Commentaire</div>
                             <div class="item-input">
                                 <input type="text" placeholder="..." value.bind="vin.remarque & validate">
                             </div>
@@ -121,7 +121,7 @@
                 <li class="align-top form-group">
                     <div class="item-content">
                         <div class="item-inner">
-                            <div class="item-title label" style="width: 45%;" t="localization">Localisation</div>
+                            <div class="item-title label" t="localization">Localisation</div>
                             <div class="item-input">
                                 <input type="text" placeholder="D/G.y.x" value.bind="vin.localisation & validate" required>
                             </div>
@@ -131,7 +131,7 @@
                 <li class="align-top form-group">
                     <div class="item-content">
                         <div class="item-inner">
-                            <div class="item-title label" style="width: 45%;" t="capacity">Contenance</div>
+                            <div class="item-title label" t="capacity">Contenance</div>
                             <div class="item-input">
                                 <input type="text" placeholder="75" value.bind="vin.contenance & validate" required>
                             </div>
@@ -152,7 +152,7 @@
                     <div class="accordion-item-content list-block cards-list">
                         <ul>
                             <li class="card" repeat.for="event of vin.history">
-                                <div class="card-header color-gray"><span t="histUpdated">updated on : </span> &nbsp; ${showDate(event.date)} &nbsp;
+                                <div class="card-header color-gray"><span t="histUpdated">updated on : </span> &nbsp; ${event.date} &nbsp;
                                     <div class="chip" css="${event.difference && event.difference!=0 ? 'display: block; visibility: visible;' : 'display: none; visibility: hidden;'}">
                                         <div class="chip-label"><span t="histNumbBottlesDiff"># difference : </span> &nbsp; ${event.difference}</div>
                                     </div>

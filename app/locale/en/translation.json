@@ -46,7 +46,7 @@
     "consumptionStat":"Consumption Statistics",
     "from":"from",
     "to":"to",
-    "currentDate":"now",
+    "now":"now",
     "oneYear":"one year",
     "twoYears":"two years",
     "threeYears":"three years"
