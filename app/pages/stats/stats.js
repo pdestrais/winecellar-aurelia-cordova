@@ -20,7 +20,7 @@ export class Stats extends BaseI18N {
     this.fromOptions=[{value:1,display:this.i18n.tr('oneYear',this.i18n.getLocale())},
                 {value:2,display:this.i18n.tr('twoYears')},
                 {value:3,display:this.i18n.tr('threeYears')}];   
-    this.toOptions=[{value:0,display:this.i18n.tr('now')},
+    this.toOptions=[{value:0,display:this.i18n.tr('currentDate',this.i18n.getLocale())},
                 {value:1,display:this.i18n.tr('oneYear')},
                 {value:2,display:this.i18n.tr('twoYears')},
                 {value:3,display:this.i18n.tr('threeYears')}];   

@@ -70,7 +70,7 @@ export class vin extends BaseI18N {
       let errors = this.controller.validate();
       if (errors.length == 0) {
         if (this.isDirty) {
-                this.vin.lastUpdated = new Date().toLocaleString();
+                this.vin.lastUpdated = new Date().toISOString();
                 var selOrigine = this.origines.find(function matcher(origine) {return (origine.id == _self.vin.origine.id)});
                 this.vin.origine = {id:selOrigine.doc._id,pays:selOrigine.doc.pays,region:selOrigine.doc.region};
                 var seltype = this.types.find(function matcher(type) {return (type.id == _self.vin.type.id)});
@@ -130,6 +130,10 @@ export class vin extends BaseI18N {
         this.isDirty=true;
         this.saveVin();
     }
+
+    showDate(ISODateString) {
+        return ISODateString.substring(0,10)
+    } 
 }
 
 class VinModel {
