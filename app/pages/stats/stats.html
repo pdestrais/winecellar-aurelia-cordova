@@ -71,5 +71,22 @@
             </form>
         <div id="title"></div>
         <div id="chart"></div>
+        <br><br><br><br><br><br><br><br>
+        <div class="statTable">
+            <table border="0" cellpadding="10">
+                <thead>
+                    <tr>
+                        <th>region</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr repeat.for="d of dataset">
+                        <td>${d.label}</td>
+                        <td>${d.count}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 </template>

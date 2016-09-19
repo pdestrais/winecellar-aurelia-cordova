@@ -176,3 +176,58 @@ div.au-stagger {
     opacity: 1;
   }
 }
+
+    .statTable table {
+        border-collapse: collapse;
+        text-align: left;
+        width: 100%;
+    }
+
+    .statTable {
+        font: normal 12px/150% Arial, Helvetica, sans-serif;
+        background: #fff;
+        overflow: hidden;
+        border: 1px solid #069;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    .statTable table td, .statTable table th {
+        padding: 3px 10px;
+    }
+
+    .statTable table thead th {
+        background: 0;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699',endColorstr='#00557F');
+        background-color: rgb(33,150,253);
+        color: #FFF;
+        font-size: 15px;
+        font-weight: 700;
+        border-left: 1px solid #0070A8;
+    }
+
+        .statTable table thead th:first-child {
+            border: none;
+        }
+
+    .statTable table tbody td {
+        color: #00496B;
+        border-left: 1px solid #E1EEF4;
+        font-size: 12px;
+        border-bottom: 1px solid #E1EEF4;
+        font-weight: 400;
+    }
+
+    .statTable table tbody td:first-child {
+            border-left: none;
+        }
+
+    .statTable table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .statTable tr:hover td {
+        background-color: #069;
+        color: white;
+    }
