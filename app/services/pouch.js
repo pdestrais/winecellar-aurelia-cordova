@@ -3,6 +3,9 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import { Router } from 'aurelia-router';
 import { SimpleCache } from './simpleCache';
 import {I18N} from 'aurelia-i18n';
+
+//var PouchDB = require('pouchdb');
+
 		
 @inject(EventAggregator, Router, SimpleCache,I18N)
 export class Pouch {
@@ -185,9 +188,10 @@ export class Pouch {
 			// no config document exists
 			console.log("no existing config "+JSON.stringify(err));
 			return _self.db.put({
+				_id:"config",
 				serverUrl: config.serverUrl,
 				locale : config.locale
-			}, 'config');
+			});
 		});
 	}
 

@@ -87,10 +87,10 @@ export class Stats extends BaseI18N {
   }
 
   renderDonut() {
-        var width = 500;
-        var height = 500;
+        var width = 320;
+        var height = 320;
         var radius = Math.min(width, height) / 2;
-        var donutWidth = 75;                            // NEW
+        var donutWidth = 40;                            // NEW
         var legendRectSize = 15;                                  // NEW
         var legendSpacing = 2;                                    // NEW
         var color = d3.scaleOrdinal(d3.schemeCategory20b);
@@ -161,9 +161,9 @@ export class Stats extends BaseI18N {
           .attr('class', 'legend')                                // NEW
           .attr('transform', function(d, i) {                     // NEW
             var height = legendRectSize + legendSpacing;          // NEW
-            var offset =  height * color.domain().length / 2;     // NEW
-            var horz = -2 * legendRectSize;                       // NEW
-            var vert = i * height - offset;                       // NEW
+            var offset =  height * color.domain().length / 2 / 2;     // NEW
+            var horz = -2 * legendRectSize - (width-donutWidth)/4 + i%2 * (width-donutWidth)/5*2 ;                       // NEW
+            var vert = Math.trunc(i/2) * height - offset;                       // NEW
             return 'translate(' + horz + ',' + vert + ')';        // NEW
           });                                                     // NEW
         legend.append('rect')                                     // NEW
@@ -174,7 +174,7 @@ export class Stats extends BaseI18N {
         legend.append('text')                                     // NEW
           .attr('x', legendRectSize + legendSpacing)              // NEW
           .attr('y', legendRectSize - legendSpacing)              // NEW
-          .text(function(d) { return d; });                       // NEW
+          .text(function(d) { return d.substring(0,18); });                       // NEW
   }
   
 }
