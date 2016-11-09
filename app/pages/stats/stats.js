@@ -87,18 +87,12 @@ export class Stats extends BaseI18N {
   }
 
   renderDonut() {
-/*              var dataset = [
-          { label: 'Abulia', count: 10 },
-          { label: 'Betelgeuse', count: 20 },
-          { label: 'Cantaloupe', count: 30 },
-          { label: 'Dijkstra', count: 40 }
-        ];
-*/        var width = 360;
-        var height = 360;
+        var width = 500;
+        var height = 500;
         var radius = Math.min(width, height) / 2;
         var donutWidth = 75;                            // NEW
-        var legendRectSize = 18;                                  // NEW
-        var legendSpacing = 4;                                    // NEW
+        var legendRectSize = 15;                                  // NEW
+        var legendSpacing = 2;                                    // NEW
         var color = d3.scaleOrdinal(d3.schemeCategory20b);
 
         //cleaning up before drawing

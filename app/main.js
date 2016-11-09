@@ -4,7 +4,7 @@ import Backend from 'i18next-xhr-backend';
 import 'framework7/dist/css/framework7.material.min.css';
 import 'framework7/dist/css/framework7.material.colors.min.css';
 import 'framework7/dist/js/framework7.min.js'
-import '../styles/style.css';
+import './css/styles.css';
 import './css/MyCellar.css';
 import enTranslations from './locale/en/translation.json';
 import frTranslations from './locale/fr/translation.json';
