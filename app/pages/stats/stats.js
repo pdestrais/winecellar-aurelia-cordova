@@ -26,6 +26,7 @@ export class Stats extends BaseI18N {
                 {value:3,display:this.i18n.tr('threeYears')}];   
     this.start = 1;
     this.end = 0;
+    this.colors = [];
   }
 
   attached () {
@@ -37,7 +38,9 @@ export class Stats extends BaseI18N {
       return _self.pouch.getVins().then(vins => {
             _self.vins = vins.map(v => v.doc);
             _self.fetchData();
-            this.initializeChart();
+            var _self1 = _self
+            setTimeout(function(){ _self1.initializeChart(); }, 200)
+//            _self.initializeChart();
         });      
   }
   
@@ -80,20 +83,20 @@ export class Stats extends BaseI18N {
       bottom: 30,
       left:   50
     };
-    this.width  = 960 - this.margin.left - this.margin.right;
-    this.height = 500 - this.margin.top - this.margin.bottom;
+    this.width  = 360 - this.margin.left - this.margin.right;
+    this.height = 360 - this.margin.top - this.margin.bottom;
 
     this.renderDonut();
   }
 
   renderDonut() {
-        var width = 320;
-        var height = 320;
+        var width = this.width;
+        var height = this.height;
         var radius = Math.min(width, height) / 2;
-        var donutWidth = 40;                            // NEW
+        var donutWidth = 100;                            // NEW
         var legendRectSize = 15;                                  // NEW
         var legendSpacing = 2;                                    // NEW
-        var color = d3.scaleOrdinal(d3.schemeCategory20b);
+        var color = d3.scaleOrdinal(d3.schemeCategory20);
 
         //cleaning up before drawing
         var title = d3.select('#title');
@@ -134,6 +137,7 @@ export class Stats extends BaseI18N {
           .attr('fill', function(d, i) {
             return color(d.data.label);
           });
+        this.colors = color.domain();
         var _self = this;
         path.on('mouseover', function(d) {                            // NEW
         var total = d3.sum(_self.dataset.map(function(d) {                // NEW
@@ -154,7 +158,7 @@ export class Stats extends BaseI18N {
             .style('left', (d3.event.layerX + 10) + 'px');            // NEW
         });                                                           // NEW
         */
-        var legend = svg.selectAll('.legend')                     // NEW
+/*        var legend = svg.selectAll('.legend')                     // NEW
           .data(color.domain())                                   // NEW
           .enter()                                                // NEW
           .append('g')                                            // NEW
@@ -175,6 +179,18 @@ export class Stats extends BaseI18N {
           .attr('x', legendRectSize + legendSpacing)              // NEW
           .attr('y', legendRectSize - legendSpacing)              // NEW
           .text(function(d) { return d.substring(0,18); });                       // NEW
+*/        
+        var tds = d3.selectAll('.tabcolor')
+          .data(this.dataset)
+//          .enter()
+//          .html('1')
+/*          .html(function(d, i) {
+            return color(d.label);
+          })
+*/
+          .style('background-color', function(d, i) {
+            return color(d.label);
+          })
   }
   
 }

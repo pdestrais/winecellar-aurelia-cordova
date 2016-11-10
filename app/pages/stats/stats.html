@@ -31,7 +31,7 @@
 <!--    <link rel="stylesheet" href="css/line-chart.css">
 -->
     <section class="au-animate">
-        <h2>Consumption Statistics</h2>
+        <h2 t="consumption">Consumption Statistics</h2>
         <div if.bind="didError" class="alert alert-danger" role="alert">${errorMessage}</div>
         <form>
             <div class="list-block">
@@ -75,16 +75,23 @@
             <table border="0" cellpadding="10">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>region</th>
                         <th>#</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="chartTableBody">
                     <tr repeat.for="d of dataset">
+                        <td class="tabcolor"></td>
                         <td>${d.label}</td>
                         <td>${d.count}</td>
                     </tr>
-                </tbody>
+<!--                    <tr repeat.for="d of dataset">
+                        <td style="background-color: ${colors.}"
+                        <td>${d.label}</td>
+                        <td>${d.count}</td>
+                    </tr>
+-->                </tbody>
             </table>
         </div>
     </section>

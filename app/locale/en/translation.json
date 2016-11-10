@@ -49,5 +49,6 @@
     "currentDate":"now",
     "oneYear":"one year",
     "twoYears":"two years",
-    "threeYears":"three years"
+    "threeYears":"three years",
+    "consumption":"Consumption Statistics"
 }
