@@ -26,7 +26,7 @@ export class RapportPDF {
     
     cellarToPDF () {
         // PDF doc initialization
-		var ymax = 20;
+		var yPageMax = 20;
 		var startY = 2.2;
 		var y = startY;
 		var pageNum = 0;
@@ -61,7 +61,7 @@ export class RapportPDF {
                     _self1.rapport[i].origines.forEach(function(item1,i1){
                         if (item1.count>0){
                             // check if we have enough space for origine and at least one extra line bellow
-                            if (y+0.8+0.3>=ymax) {
+                            if (y+0.8+0.3>=yPageMax) {
                                 pageNum++;
                                 y=startY;
                                 _self1.createNewPDFPageAndHeader(pageNum);						
@@ -90,10 +90,27 @@ export class RapportPDF {
                                 _self3.rapport[i].origines[i1].annees[iYear].wines = _self2.rapportClass.selectedDistinctWinesforYearForOriginForType(sortedWineCollection,yearItem,item1,item);                  
                                 var _self4=_self3;
                                 _self3.rapport[i].origines[i1].annees[iYear].wines.forEach(function(wineItem,iWine){
+                                    let ytemp,ymax,c;
                                     if (wineItem.nbreBouteillesReste>0){
-                                        if (y+0.5>=ymax) {
+                                        //Compute how much space is needed for the next line to display :
+                                        //- minimum 0.3 in no comment history, and only one location.
+                                        //- otherwize : 0.3 * max (# of comments in history, # of locations) 
+                                        let commentsHistoryNbr = 0;
+                                        if (wineItem.history)
+                                            wineItem.history.map( (value,index) =>  {   
+                                                                                        if (value.comment && value.type=="comment" && value.comment.trim()!="") {
+                                                                                            commentsHistoryNbr++;
+                                                                                        }
+                                                                                    });
+                                        let locationNbr = 0;
+                                        wineItem.localisation.split("&").map((value,index) =>   {   locationNbr++;
+                                                                                                })
+                    
+                                        ymax = y + (Math.max(commentsHistoryNbr,locationNbr))*0.3 + 0.1
+                                        if (ymax>=yPageMax) {
                                             pageNum++;
                                             y=startY+0.1;
+                                            ymax = y + (Math.max(commentsHistoryNbr,locationNbr))*0.3 + 0.1
                                             _self4.createNewPDFPageAndHeader(pageNum);
                                             _self4.doc.setFontSize(9);
                                             _self4.doc.setTextColor(0);
@@ -102,12 +119,31 @@ export class RapportPDF {
                                         y=y+0.3;
                                         _self4.doc.text(1.2,y,""+wineItem.annee);
                                         _self4.doc.text(3,y,wineItem.nom);
-                                        _self4.doc.text(11,y,wineItem.appellation.longue);
-                                        _self4.doc.text(17.5,y,""+wineItem.prixAchat);
-                                        _self4.doc.text(19,y,""+wineItem.nbreBouteillesReste);
-                                        _self4.doc.text(20.5,y,wineItem.localisation);
-                                        wineItem.remarque?_self4.doc.text(23.3,y,wineItem.remarque):_self4.doc.text(23.3,y,"");
-                                        y=y+0.1;
+                                        _self4.doc.text(11,y,wineItem.appellation.courte);
+                                        _self4.doc.text(13.3,y,""+wineItem.prixAchat);
+                                        _self4.doc.text(15.5,y,""+wineItem.nbreBouteillesReste);
+                                        //Display Localisation on multiple lines if needed
+                                        ytemp = y;
+                                        c = 0;
+                                        wineItem.localisation.split("&").map((value,index) =>   {   ytemp = y+ c * 0.3;
+                                                                                                    _self4.doc.text(17,ytemp,value.trim());
+                                                                                                    c++;
+                                                                                                });
+                                        //_self4.doc.text(17,y,wineItem.localisation);
+                                        //Display either a remarque (old style)
+                                        wineItem.remarque?_self4.doc.text(18.5,y,wineItem.remarque):_self4.doc.text(18.5,y,"");
+                                        //... or a new remark created based on history ... on multiple lines
+                                        ytemp = y;
+                                        c = 0;
+                                        if (wineItem.history)
+                                            wineItem.history.map( (value,index) => { if (value.comment && value.type=="comment" && value.comment.trim()!="") {
+                                                                                        ytemp = y + c * 0.3; 
+                                                                                        _self4.doc.text(18.5,ytemp,value.date.slice(0,10)+": "+value.comment);
+                                                                                        c++;
+                                                                                     }
+                                                                                    });
+                                        //y=y+0.1;
+                                        y = ymax;
                                         _self4.doc.setLineWidth(0.02);
                                         _self4.doc.rect(1,y,28,0.0,"DF");
                                     }                                
@@ -120,7 +156,7 @@ export class RapportPDF {
 			_self.doc.setFontSize(14);
 			_self.doc.setTextColor(0);
 			_self.doc.setDrawColor(0);					
-			if (y+1.2>=ymax) {
+			if (y+1.2>=yPageMax) {
 				pageNum++;
 				y=startY;
 				_self.createNewPDFPageAndHeader(pageNum);
@@ -148,13 +184,14 @@ export class RapportPDF {
 		this.doc.setFontSize(12);
 		this.doc.setTextColor(255);
 		this.doc.setFontStyle('bold');
-		this.doc.text(1.2,2.1,"Année");
-		this.doc.text(3,2.1,"Nom");
-		this.doc.text(11,2.1,"Appellation");
-		this.doc.text(16.5,2.1,"Prix achat");
-		this.doc.text(19,2.1,"Reste");
-		this.doc.text(20.5,2.1,"Loc.G/D.y.x");
-		this.doc.text(23.3,2.1,"Commentaire");
+		this.doc.text(1.2,1.9,"Année");
+		this.doc.text(3,1.9,"Nom");
+		this.doc.text(10,1.9,"Appellation");
+		this.doc.text(12.7,1.9,"Prix achat");
+		this.doc.text(15,1.9,"Reste");
+		this.doc.text(16.7,1.65,"Loc.");
+		this.doc.text(16.7,2.1,"G/D.y.x");
+		this.doc.text(18.6,1.9,"Commentaire");
 		
 		// adding footer
 		this.doc.setLineWidth(0.05);
@@ -168,5 +205,13 @@ export class RapportPDF {
 		this.doc.text(1, 20.3, reportDate.toLocaleDateString('fr-FR'));
 		this.doc.text(27, 20.3, "page"+pgNum);
 	}
+
+    historyAsString(wine) {
+        let historyString = "";
+        wine.history.map(value => {if (value.comment) historyString = historyString+value.date.slice(0,10)+": "+value.comment+ " | "});
+        historyString = historyString.slice(0,historyString.length-2);
+        return historyString
+    }
+
 
 }

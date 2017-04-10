@@ -280,7 +280,7 @@ export class Pouch {
 
 	saveVin (vin) {
 		let _self = this;
-		let newVin = vin;
+		let newVin = Object.assign({}, vin);
 		let newId = "vin|"+vin.nom+"|"+vin.annee;
 		if (!vin._id) {
 			//Nouveau vin à créer avec l'Id généré.
@@ -291,6 +291,8 @@ export class Pouch {
 			return this.saveDoc(vin).then(result => {return result}).catch(err => {return err});			
 		} else {
 			// existing wine and update done in name or year => create a new wine (with newId) and delete the one with previous id (vin.id).
+			newVin._id = newId;
+			delete(newVin._rev);
 			return this.createDoc(newVin).then(_self.deleteDoc(vin).then(result => {})).catch(err => {return err});
 		}
 	

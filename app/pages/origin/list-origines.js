@@ -31,7 +31,7 @@ export class ListAppellations extends BaseI18N {
     }
 
     addOrigine() {
-        this.router.navigate('/appellation');
+        this.router.navigate('/origine');
     }
 
     viewOrigine(origine) {

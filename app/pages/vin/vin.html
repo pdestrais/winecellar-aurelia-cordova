@@ -112,9 +112,12 @@
                     <div class="item-content">
                         <div class="item-inner">
                             <div class="item-title label" style="width: 45%;" t="comment">Commentaire</div>
-                            <div class="item-input">
+                            <div if.bind="historyPresence()" class="item-title label" style="width: 55%;">${historyString}</div>
+                            <div if.bind="!historyPresence()" class="item-title label" style="width: 55%;">${vin.remarque}</div>
+<!--                            <div class="item-input">
                                 <input type="text" placeholder="..." value.bind="vin.remarque & validate">
                             </div>
+-->
                         </div>
                     </div>
                 </li>

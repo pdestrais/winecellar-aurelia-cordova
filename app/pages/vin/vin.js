@@ -23,6 +23,7 @@ export class vin extends BaseI18N {
         this.nbreAvantUpdate = 0;
         this.newWine = true;
         this.isDirty = false;
+        this.historyString = "";
         console.log('Loading reference values');
         this.origines = this.cache.get("originesRefList");
         this.appellations = this.cache.get("appellationsRefList");
@@ -51,12 +52,18 @@ export class vin extends BaseI18N {
         console.dir(this.appellations);
         var _self = this;
         if (params.id) {
-            return this.pouch.getDoc(params.id).then(vin => {Object.assign(_self.vin, vin); _self.nbreAvantUpdate=_self.vin.nbreBouteillesReste; _self.newWine=false;});
+            return this.pouch.getDoc(params.id).then(vin => {Object.assign(_self.vin, vin); _self.nbreAvantUpdate=_self.vin.nbreBouteillesReste; _self.newWine=false; _self.historyAsString()});
 //            return this.pouch.getDoc(params.id).then(vin => _self.vin = vin);
         } else
             return (this.vin = new VinModel("","","","","","","","D.y.x","75"))
     }
  
+    historyAsString() {
+        this.historyString = "";
+        this.vin.history.map(value => {if (value.comment) this.historyString = this.historyString+value.date.slice(0,10)+": "+value.comment+ " | "});
+        this.historyString = this.historyString.slice(0,this.historyString.length-2);
+    }
+
     historyPresence() {
         return (typeof(this.vin.history) != 'undefined' && this.vin.history.length > 0)
     }
